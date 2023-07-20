@@ -27,10 +27,11 @@ def get():
 
 @app.route('/students/<int:student_id>', methods=['GET'])
 def get_student(student_id):
-    return students.get(
-        student_id,
-        {'error': 'Student not found'}
-    )
+    student = Student.query.get(student_id)
+    if student:
+        return student.as_dict()
+    else:
+        return {'error': 'Student not found'}
 
 @app.route('/students', methods=['POST'])
 def create():
