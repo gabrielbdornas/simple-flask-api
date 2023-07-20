@@ -24,3 +24,12 @@ def create():
     }
     students[id] = new_student
     return new_student
+
+
+@app.route('/students/<int:student_id>', methods=['DELETE'])
+def delete(student_id):
+    if student_id in students.keys():
+        del students[student_id]
+        return {'data': 'Student deleted successfully.'}
+    else:
+        return {'error': 'Student not found.'}
