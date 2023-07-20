@@ -1,7 +1,8 @@
 from flask import Flask
+from data import students
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return 'Hello World! Teste modo debug'
+@app.route('/students', methods=['GET'])
+def get():
+    return students
