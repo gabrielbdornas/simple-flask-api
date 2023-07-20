@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from data import students
 
 app = Flask(__name__)
@@ -13,3 +13,14 @@ def get_student(student_id):
         student_id,
         {'error': 'Student not found'}
     )
+
+@app.route('/students', methods=['POST'])
+def create():
+    id = sorted(students.keys())[-1] + 1
+    new_student = {
+        'name': request.json['name'],
+        'email': request.json['email'],
+        'room': request.json['room'],
+    }
+    students[id] = new_student
+    return new_student
