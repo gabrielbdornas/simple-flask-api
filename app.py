@@ -35,15 +35,14 @@ def get_student(student_id):
 
 @app.route('/students', methods=['POST'])
 def create():
-    id = sorted(students.keys())[-1] + 1
-    new_student = {
-        'name': request.json['name'],
-        'email': request.json['email'],
-        'room': request.json['room'],
-    }
-    students[id] = new_student
-    return new_student
-
+    new_student = Student(
+        name=request.json['name'],
+        email=request.json['email'],
+        room=request.json['room'],
+        )
+    db.session.add(new_student)
+    db.session.commit()
+    return new_student.as_dict()
 
 @app.route('/students/<int:student_id>', methods=['DELETE'])
 def delete(student_id):
