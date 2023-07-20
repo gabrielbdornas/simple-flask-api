@@ -33,3 +33,13 @@ def delete(student_id):
         return {'data': 'Student deleted successfully.'}
     else:
         return {'error': 'Student not found.'}
+
+@app.route('/students/<int:student_id>', methods=['PUT'])
+def update(student_id):
+    if student_id in students.keys():
+        students[student_id]['name']=request.json['name']
+        students[student_id]['email']=request.json['email']
+        students[student_id]['room']=request.json['room']
+        return students[student_id]
+    else:
+        return {'error':'student not found'}
