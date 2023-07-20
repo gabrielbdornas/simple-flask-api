@@ -1,0 +1,2 @@
+[tool.taskipy.tasks]
+server = { cmd = "flask run --debug", help = "Inicia o servidor local." }
